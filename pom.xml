@@ -17,6 +17,7 @@
 	<modules>
 		<module>user-service</module>
 		<module>service-registry</module>
+		<module>ticket-service</module>
 	</modules>
 	<url/>
 	<licenses>

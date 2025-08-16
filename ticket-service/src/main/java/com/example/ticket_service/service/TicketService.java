@@ -15,6 +15,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -25,6 +26,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class TicketService {
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+
     @Autowired
     private TicketRepository ticketRepository;
 
@@ -104,13 +108,17 @@ public class TicketService {
         Ticket ticket = ticketRepository.findById(ticketId)
                 .orElseThrow(() -> new RuntimeException("Ticket not found "));
 
-        if (ticket.getStatus() == TicketStatus.SOLD) {
+        if (ticket.getStatus() == TicketStatus.SOLD && ticket.getUserId() != null) {
             throw new RuntimeException("Ticket already sold");
         }
 
         ticket.setStatus(TicketStatus.SOLD);
         ticket.setUserId(userId);
         ticketRepository.save(ticket);
+
+        // Gửi event Kafka
+        String event = String.format("{\"ticketId\":%d,\"userId\":%d}", ticketId, userId);
+        kafkaTemplate.send("ticket.sold", event);
 
         return ticketMapper.toDto(ticket);
     }

@@ -11,6 +11,8 @@ import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -32,13 +34,17 @@ public class TicketService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Cacheable(value = "ticketLists")
     public List<TicketDTO> getAllTickets() {
+        System.out.println("📦 Query getAllTickets DB...");
         return ticketRepository.findAll().stream()
                 .map(ticketMapper::toDto)
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(value = "searchTickets")
     public List<TicketDTO> searchTickets(TicketSearchRequestDTO req) {
+        System.out.println("📦 Query searchTickets DB...");
         Specification<Ticket> spec = (root, query, cb) -> cb.conjunction();
 
         if (req.getId() != null) {
@@ -109,6 +115,7 @@ public class TicketService {
         return ticketMapper.toDto(ticket);
     }
 
+    @CacheEvict(value = { "ticketLists", "searchTickets" }, allEntries = true)
     public String deleteTicket(Long id) {
         if (!ticketRepository.existsById(id)) {
             throw new RuntimeException("Ticket với id " + id + " không tồn tại");

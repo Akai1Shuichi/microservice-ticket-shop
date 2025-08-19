@@ -1,4 +1,5 @@
-version: '3'
+version: '3.8'
+
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.2.1
@@ -7,7 +8,6 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "2181:2181"
-
   kafka:
     image: confluentinc/cp-kafka:7.2.1
     depends_on:
@@ -21,3 +21,28 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+  postgres:
+    image: postgres:15
+    container_name: postgres_ticketshop
+    restart: always
+    environment:
+      POSTGRES_USER: ticketshopuser
+      POSTGRES_PASSWORD: secret123
+      POSTGRES_DB: ticketshopdb
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    container_name: redis_ticketshop
+    restart: always
+    command: ["redis-server", "--requirepass", ""]
+    ports:
+      - "6381:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:

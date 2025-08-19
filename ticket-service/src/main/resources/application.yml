@@ -4,12 +4,12 @@ spring:
   application:
     name: ticket-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/ticketshopdb
+    url: jdbc:postgresql://localhost:5434/ticketshopdb
     username: ticketshopuser
     password: secret123
   redis:
     host: localhost
-    port: 6379
+    port: 6381
     password: ""
     timeout: 60000
   jpa:

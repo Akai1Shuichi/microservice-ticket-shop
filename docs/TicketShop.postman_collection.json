@@ -1,0 +1,355 @@
+{
+	"info": {
+		"_postman_id": "e1da145b-927b-45f0-8052-c8caebaca30c",
+		"name": "TicketShop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38624319",
+		"_collection_link": "https://red-shuttle-680011.postman.co/workspace/My-Workspace~e28cf21b-7506-4c6e-89ce-5e84b8b4323d/collection/38624319-e1da145b-927b-45f0-8052-c8caebaca30c?action=share&source=collection_link&creator=38624319"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"toan@gmail.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{userUrl}}/users/auth/login",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								"users",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"tuan@gmail.com\",\n    \"password\": \"123456\",\n    \"username\": \"tuan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{userUrl}}/users/auth/signup",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								"users",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "signup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"tuan@gmail.com\",\n    \"password\": \"123456\",\n    \"username\": \"tuan\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userUrl}}/users/auth/signup",
+									"host": [
+										"{{userUrl}}"
+									],
+									"path": [
+										"users",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Aug 2025 10:02:40 GMT"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"username\": \"tuan@gmail.com\",\n    \"email\": \"tuan@gmail.com\"\n}"
+						}
+					]
+				},
+				{
+					"name": "me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userUrl}}/users/me",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userUrl}}/users",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userUrl}}/users/1",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket",
+			"item": [
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"ve 3\",\n    \"status\": \"AVAILABLE\",\n    \"price\": 300000,\n    \"description\": \"test 3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ticketUrl}}/tickets/save",
+							"host": [
+								"{{ticketUrl}}"
+							],
+							"path": [
+								"tickets",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ticketsSearch",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ticketUrl}}/tickets/search",
+							"host": [
+								"{{ticketUrl}}"
+							],
+							"path": [
+								"tickets",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{ticketUrl}}/tickets/1/buy",
+							"host": [
+								"{{ticketUrl}}"
+							],
+							"path": [
+								"tickets",
+								"1",
+								"buy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tickets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ticketUrl}}/tickets",
+							"host": [
+								"{{ticketUrl}}"
+							],
+							"path": [
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{ticketUrl}}/tickets/1",
+							"host": [
+								"{{ticketUrl}}"
+							],
+							"path": [
+								"tickets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{accessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

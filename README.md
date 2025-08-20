@@ -25,8 +25,11 @@ The system also integrates **Redis** for caching and **Kafka** for event-driven 
    This will build and start all containers defined in the `docker-compose.yml` file.
 4. Run the services: Service Registry, API Gateway, User Service, Ticket Service
 
-## How to Stop
-To stop and remove all containers, run:
+## To stop and remove all containers, run:
 ```bash
 docker-compose down
 ```
+
+## How to test API in PostMan
+1. Import the PostMan collection from `docs/TicketShop.postman_collection.json` file in a project.
+2. Run the collection.
